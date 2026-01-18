@@ -30,6 +30,5 @@ ENV U2NET_HOME=/app/.u2net
 EXPOSE 8000
 
 # Command to run the application
-# We use shell form to allow variable expansion if needed, but array form is safer.
-# Railway sets $PORT variable. We must bind to 0.0.0.0.
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Use shell form to ensure $PORT is expanded correctly
+CMD uvicorn main:app --host 0.0.0.0 --port $PORT
